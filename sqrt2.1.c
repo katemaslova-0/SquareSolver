@@ -25,7 +25,7 @@ int main(void)
 	if (check(a, b, c) == 1)
 		calc(a, b, c, discriminant);
 	
-return 0;
+	return 0;
 }
 
 
@@ -67,3 +67,4 @@ void calc(double a, double b, double c, double discriminant)
 	if (discriminant > 0)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", ((-b)+sqrt(discriminant))/2/a, (-b-sqrt(discriminant))/2/a);	
 }
+
