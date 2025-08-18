@@ -4,35 +4,48 @@
 #include <stdlib.h>
 #include <math.h>
 
-void calc(double a, double b, double c, double discriminant, double * ptr_x, double * ptr_x1, double * ptr_x2);
+void calc(double a, double b, double c,  double * ptr_x, double * ptr_x1, double * ptr_x2, double * ptr_discr, double * ptr_sqr_discr);
 int get_number(double * ptr);
 int check(double a, double b, double c);
-void output(double * ptr_x, double * ptr_x1, double * ptr_x2, double discriminant);
+void output(double * ptr_x, double * ptr_x1, double * ptr_x2, double *ptr_discr);
 
 
 int main(void)
 {
-	double a, b, c; //коэффициенты при x^2, x и свободный член соответственно
+	double a, b, c, x, x1, x2, discriminant, sqr_discr;
 	double * ptr_a;
 	double * ptr_b;
 	double * ptr_c;
 	double * ptr_x;
 	double * ptr_x1;
 	double * ptr_x2;
+	double * ptr_discr;
+	double *ptr_sqr_discr;
+	
+	ptr_a = &a;
+	ptr_b = &b;
+	ptr_c = &c;
+	ptr_x = &x;
+	ptr_x1 = &x1;
+	ptr_x2 = &x2;
+	ptr_discr = &discriminant;
+	ptr_sqr_discr = &sqr_discr;
 
-	double discriminant;
 	
 	printf("Введите коэффициент при x^2: ");
 	if (get_number(ptr_a) != 0)
 	{
+		printf("%lf", a);
 		printf("Введите коэффициент при x: ");
 		if (get_number(ptr_b) != 0)
 		{
+			printf("%lf", b);
 			printf("Введите свободный член: ");
 			if (get_number(ptr_c) != 0)
 			{
+				printf("%lf", c);
 				if (check(a, b, c) == 1)
-					calc(a, b, c, discriminant, ptr_x, ptr_x1, ptr_x2);
+					calc(a, b, c, ptr_x, ptr_x1, ptr_x2, ptr_discr, ptr_sqr_discr);
 			}
 		}
 	}
@@ -51,8 +64,6 @@ int check(double a, double b, double c)
 
 	if (a != 0)
 		return 1;
-	else
-		return 0;
 }
 
 
@@ -68,24 +79,25 @@ int get_number(double * ptr)
 }
 
 
-void calc(double a, double b, double c, double discriminant, double * ptr_x, double * ptr_x1, double * ptr_x2)
+void calc(double a, double b, double c, double * ptr_x, double * ptr_x1, double * ptr_x2, double * ptr_discr, double * ptr_sqr_discr)
 {
-	discriminant = b * b - 4 * a * c;
-	double sqr_d = sqrt(discriminant);
+	*ptr_discr = b * b - 4 * a * c;
+	*ptr_sqr_discr = sqrt(*ptr_discr);
 	*ptr_x = (- b) / 2 /a;
-	*ptr_x1 = (- b + sqr_d) / 2 / a;
-	*ptr_x2 = (- b - sqr_d) / 2 / a;
+	*ptr_x1 = (- b + *ptr_sqr_discr) / 2 / a;
+	*ptr_x2 = (- b - *ptr_sqr_discr) / 2 / a;
 }
 
-void output(double * ptr_x, double * ptr_x1, double * ptr_x2, double discriminant)
+void output(double * ptr_x, double * ptr_x1, double * ptr_x2, double * ptr_discr)
 {
-	if (discriminant < 0)
+	if (*ptr_discr < 0)
 	printf("Уравнение не имеет решений\n");
-	if (discriminant == 0)
+	if (*ptr_discr == 0)
 	printf("Уравнение имеет одно решение: %.2f\n", *ptr_x);
-	if (discriminant > 0)
+	if (*ptr_discr > 0)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", *ptr_x1, *ptr_x2);
 }
+
 
 
 
