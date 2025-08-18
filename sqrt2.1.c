@@ -35,17 +35,17 @@ int main(void)
 	printf("Введите коэффициент при x^2: ");
 	if (get_number(ptr_a) != 0)
 	{
-		printf("%lf", a);
 		printf("Введите коэффициент при x: ");
 		if (get_number(ptr_b) != 0)
 		{
-			printf("%lf", b);
 			printf("Введите свободный член: ");
 			if (get_number(ptr_c) != 0)
 			{
-				printf("%lf", c);
 				if (check(a, b, c) == 1)
+				{
 					calc(a, b, c, ptr_x, ptr_x1, ptr_x2, ptr_discr, ptr_sqr_discr);
+					output(ptr_x, ptr_x1, ptr_x2, ptr_discr);
+				}
 			}
 		}
 	}
@@ -97,6 +97,8 @@ void output(double * ptr_x, double * ptr_x1, double * ptr_x2, double * ptr_discr
 	if (*ptr_discr > 0)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", *ptr_x1, *ptr_x2);
 }
+
+
 
 
 
