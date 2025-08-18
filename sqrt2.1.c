@@ -4,9 +4,12 @@
 #include <stdlib.h>
 #include <math.h>
 
-void calc(double a, double b, double c, double discriminant);
+void calc(double a, double b, double c, double discriminant, double * ptr_x, double * ptr_x1, double * ptr_x2);
 double get_numbers(void);
 int check(double a, double b, double c);
+double * ptr_x;
+double * ptr_x1;
+double * ptr_x2;
 
 int main(void)
 {
@@ -57,17 +60,24 @@ double get_numbers(void)
 }
 
 
-void calc(double a, double b, double c, double discriminant)
+void calc(double a, double b, double c, double discriminant, double * ptr_x, double * ptr_x1, double * ptr_x2)
 {
 	discriminant = b * b - 4 * a * c;
 	double sqr_d = sqrt(discriminant);
-	
+	*ptr_x = (- b) / 2 /a;
+	*ptr_x1 = (- b + sqr_d) / 2 / a;
+	*ptr_x2 = (- b - sqr_d) / 2 / a;
+}
+
+void output(double * ptr_x, double * ptr_x1, double * ptr_x2)
+{
 	if (discriminant < 0)
 	printf("Уравнение не имеет решений\n");
 	if (discriminant == 0)
-	printf("Уравнение имеет одно решение: %.2f\n", (- b) / 2 /a);
+	printf("Уравнение имеет одно решение: %.2f\n", *ptr_x);
 	if (discriminant > 0)
-	printf("Уравнение имеет два решения: %.2f и %.2f\n", ((- b) + sqr_d) / 2 / a, (- b - sqr_d) / 2 / a);	
+	printf("Уравнение имеет два решения: %.2f и %.2f\n", *ptr_x1, *ptr_x2);
 }
+
 
 
