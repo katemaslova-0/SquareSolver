@@ -5,8 +5,10 @@
 #include <math.h>
 
 void calc(double a, double b, double c, double discriminant, double * ptr_x, double * ptr_x1, double * ptr_x2);
-double get_number(void);
+double get_number(double * ptr);
 int check(double a, double b, double c);
+void output(double * ptr_x, double * ptr_x1, double * ptr_x, double discriminant);
+
 double * ptr_x;
 double * ptr_x1;
 double * ptr_x2;
@@ -72,7 +74,7 @@ void calc(double a, double b, double c, double discriminant, double * ptr_x, dou
 	*ptr_x2 = (- b - sqr_d) / 2 / a;
 }
 
-void output(double * ptr_x, double * ptr_x1, double * ptr_x2)
+void output(double * ptr_x, double * ptr_x1, double * ptr_x, double discriminant)
 {
 	if (discriminant < 0)
 	printf("Уравнение не имеет решений\n");
@@ -81,6 +83,7 @@ void output(double * ptr_x, double * ptr_x1, double * ptr_x2)
 	if (discriminant > 0)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", *ptr_x1, *ptr_x2);
 }
+
 
 
 
