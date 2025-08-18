@@ -5,7 +5,7 @@
 #include <math.h>
 
 void calc(double a, double b, double c, double discriminant, double * ptr_x, double * ptr_x1, double * ptr_x2);
-double get_numbers(void);
+double get_number(void);
 int check(double a, double b, double c);
 double * ptr_x;
 double * ptr_x1;
@@ -17,13 +17,13 @@ int main(void)
 	double discriminant;
 	
 	printf("Введите коэффициент при x^2: ");
-	a = get_numbers();
+	a = get_number();
 	
 	printf("Введите коэффициент при x: ");
-	b = get_numbers();
+	b = get_number();
 
 	printf("Введите свободный член: ");
-	c = get_numbers();
+	c = get_number();
 
 	if (check(a, b, c) == 1)
 		calc(a, b, c, discriminant);
@@ -48,12 +48,13 @@ int check(double a, double b, double c)
 }
 
 
-double get_numbers(void)
+double get_number(void)
 {
 	double n;
 	if (scanf("%lf", &n) != 1)
 	{
 		printf("Ошибка. Попробуйте ещё раз.");
+		return
 	}
 	else
 		return(n);
@@ -78,6 +79,7 @@ void output(double * ptr_x, double * ptr_x1, double * ptr_x2)
 	if (discriminant > 0)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", *ptr_x1, *ptr_x2);
 }
+
 
 
 
