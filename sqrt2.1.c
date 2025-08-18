@@ -14,20 +14,25 @@ double * ptr_x2;
 int main(void)
 {
 	double a, b, c; //коэффициенты при x^2, x и свободный член соответственно
+	double * ptr_a;
+	double * ptr_b;
+	double * ptr_c;
 	double discriminant;
 	
 	printf("Введите коэффициент при x^2: ");
-	a = get_number();
-	
-	printf("Введите коэффициент при x: ");
-	b = get_number();
-
-	printf("Введите свободный член: ");
-	c = get_number();
-
-	if (check(a, b, c) == 1)
-		calc(a, b, c, discriminant);
-	
+	if (get_number(ptr_a) != 0)
+	{
+		printf("Введите коэффициент при x: ");
+		if (get_number(ptr_b) != 0)
+		{
+			printf("Введите свободный член: ");
+			if (get_number(ptr_c) != 0)
+			{
+				if (check(a, b, c) == 1)
+					calc(a, b, c, discriminant, ptr_x, ptr_x1, ptr_x2);
+			}
+		}
+	}
 	return 0;
 }
 
@@ -48,16 +53,13 @@ int check(double a, double b, double c)
 }
 
 
-double get_number(void)
+double get_number(double * ptr)
 {
-	double n;
-	if (scanf("%lf", &n) != 1)
+	if (scanf("%lf", ptr) != 1)
 	{
 		printf("Ошибка. Попробуйте ещё раз.");
-		return
+		return 0;
 	}
-	else
-		return(n);
 }
 
 
@@ -79,6 +81,7 @@ void output(double * ptr_x, double * ptr_x1, double * ptr_x2)
 	if (discriminant > 0)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", *ptr_x1, *ptr_x2);
 }
+
 
 
 
