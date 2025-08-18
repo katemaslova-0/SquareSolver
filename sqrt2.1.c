@@ -5,13 +5,10 @@
 #include <math.h>
 
 void calc(double a, double b, double c, double discriminant, double * ptr_x, double * ptr_x1, double * ptr_x2);
-double get_number(double * ptr);
+int get_number(double * ptr);
 int check(double a, double b, double c);
-void output(double * ptr_x, double * ptr_x1, double * ptr_x, double discriminant);
+void output(double * ptr_x, double * ptr_x1, double * ptr_x2, double discriminant);
 
-double * ptr_x;
-double * ptr_x1;
-double * ptr_x2;
 
 int main(void)
 {
@@ -19,6 +16,10 @@ int main(void)
 	double * ptr_a;
 	double * ptr_b;
 	double * ptr_c;
+	double * ptr_x;
+	double * ptr_x1;
+	double * ptr_x2;
+
 	double discriminant;
 	
 	printf("Введите коэффициент при x^2: ");
@@ -55,13 +56,15 @@ int check(double a, double b, double c)
 }
 
 
-double get_number(double * ptr)
+int get_number(double * ptr)
 {
 	if (scanf("%lf", ptr) != 1)
 	{
 		printf("Ошибка. Попробуйте ещё раз.");
 		return 0;
 	}
+	else
+		return 1;
 }
 
 
@@ -74,7 +77,7 @@ void calc(double a, double b, double c, double discriminant, double * ptr_x, dou
 	*ptr_x2 = (- b - sqr_d) / 2 / a;
 }
 
-void output(double * ptr_x, double * ptr_x1, double * ptr_x, double discriminant)
+void output(double * ptr_x, double * ptr_x1, double * ptr_x2, double discriminant)
 {
 	if (discriminant < 0)
 	printf("Уравнение не имеет решений\n");
@@ -83,6 +86,8 @@ void output(double * ptr_x, double * ptr_x1, double * ptr_x, double discriminant
 	if (discriminant > 0)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", *ptr_x1, *ptr_x2);
 }
+
+
 
 
 
