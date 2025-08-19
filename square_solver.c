@@ -10,7 +10,7 @@ int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c);
 int check_quadraticity(double a);
 void output_quadratic_roots(double x1, double x2, int quantity_of_roots_sqr);
 void output_linear_roots(double x, int quantity_of_roots_lin);
-int coefficient_0_or_not(double n);
+int is_num_zero(double n);
 
 
 int main(void)
@@ -41,7 +41,7 @@ int main(void)
 	return 0;
 }
 
-int coefficient_0_or_not(double n)
+int is_num_zero(double n)
 {
 	if ((- 0.00001 < (n - 0)) && ((n - 0) < 0.00001))
 		return 1;
@@ -60,11 +60,11 @@ int check_quadraticity(double a)
 
 int calculate_linear_roots(double b, double c, double * ptr_x)
 {
-	if (coefficient_0_or_not(b) == 1 && coefficient_0_or_not(c) == 1)
+	if (is_num_zero(b) == 1 && is_num_zero(c) == 1)
 			return 2;
-	else if (coefficient_0_or_not(b) == 1 && coefficient_0_or_not(c) == 0)
+	else if (is_num_zero(b) == 1 && is_num_zero(c) == 0)
 			return 0;
-	else if (coefficient_0_or_not(b) == 0)
+	else if (is_num_zero(b) == 0)
 	{
 			*ptr_x = - c / b;
 			return 1;
@@ -135,6 +135,7 @@ void output_quadratic_roots(double x1, double x2, int quantity_of_roots_sqr)
 	else if (quantity_of_roots_sqr == 2)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", x1, x2);
 }
+
 
 
 
