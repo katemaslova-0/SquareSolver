@@ -14,18 +14,12 @@ int main(void)
 {
 	double a, b, c, x, x1, x2;
 	int quantity_of_roots;
-	double * ptr_x1;
-	double * ptr_x2;
-	
-
-	ptr_x1 = &x1;
-	ptr_x2 = &x2;
 
 	if (get_numbers(&a, &b, &c) != 0)
 	{
 		if (check(a, b, c) == 1)
 		{
-			quantity_of_roots = calc(a, b, c, ptr_x1, ptr_x2);
+			quantity_of_roots = calc(a, b, c, &x1, &x2);
 			output(x1, x2, quantity_of_roots);
 		}
 	}
@@ -97,6 +91,7 @@ void output(double x1, double x2, int quantity_of_roots)
 	else if (quantity_of_roots == 2)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", x1, x2);
 }
+
 
 
 
