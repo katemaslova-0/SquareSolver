@@ -4,23 +4,23 @@
 #include <stdlib.h>
 #include <math.h>
 
-int calc(double a, double b, double c, double * ptr_x1, double * ptr_x2);
-int get_numbers(double * ptr_a, double * ptr_b, double * ptr_c);
-int check(double a, double b, double c);
-void output(double x1, double x2, int quantity_of_roots);
+int calculate_roots(double a, double b, double c, double * ptr_x1, double * ptr_x2);
+int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c);
+int check_quadraticity(double a, double b, double c);
+void output_roots(double x1, double x2, int quantity_of_roots);
 
 
 int main(void)
 {
-	double a, b, c, x, x1, x2;
+	double a, b, c, x1, x2;
 	int quantity_of_roots;
 
-	if (get_numbers(&a, &b, &c) != 0)
+	if (get_coefficients(&a, &b, &c) != 0)
 	{
-		if (check(a, b, c) == 1)
+		if (check_quadraticity(a, b, c) == 1)
 		{
-			quantity_of_roots = calc(a, b, c, &x1, &x2);
-			output(x1, x2, quantity_of_roots);
+			quantity_of_roots = calculate_roots(a, b, c, &x1, &x2);
+			output_roots(x1, x2, quantity_of_roots);
 		}
 	}
 
@@ -28,7 +28,7 @@ int main(void)
 }
 
 
-int check(double a, double b, double c)
+int check_quadraticity(double a, double b, double c)
 {
 	if (a == 0.0 && b == 0.0 && c == 0.0)
 		printf("Уравнение имеет бесконечное множество решений\n");
@@ -42,7 +42,7 @@ int check(double a, double b, double c)
 }
 
 
-int get_numbers(double * ptr_a, double * ptr_b, double * ptr_c)
+int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c)
 {
 	printf("Введите коэффициент при х^2: ");
 	if (scanf("%lf", ptr_a) != 1)
@@ -65,7 +65,7 @@ int get_numbers(double * ptr_a, double * ptr_b, double * ptr_c)
 }
 
 
-int calc(double a, double b, double c, double * ptr_x1, double * ptr_x2)
+int calculate_roots(double a, double b, double c, double * ptr_x1, double * ptr_x2)
 {
 	double discriminant;
 	discriminant = b * b - 4 * a * c;
@@ -82,7 +82,7 @@ int calc(double a, double b, double c, double * ptr_x1, double * ptr_x2)
 		return 2;
 }
 
-void output(double x1, double x2, int quantity_of_roots)
+void output_roots(double x1, double x2, int quantity_of_roots)
 {
 	if (quantity_of_roots == 0)
 	printf("Уравнение не имеет решений\n");
@@ -91,6 +91,7 @@ void output(double x1, double x2, int quantity_of_roots)
 	else if (quantity_of_roots == 2)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", x1, x2);
 }
+
 
 
 
