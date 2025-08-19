@@ -5,6 +5,11 @@
 #include <math.h>
 #include <stdbool.h>
 
+#define no_roots 0
+#define one_root 1
+#define two_roots 2
+#define infinity 8
+
 int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, double * ptr_x2);
 int calculate_linear_roots(double b, double c, double * ptr_x);
 int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c);
@@ -58,15 +63,21 @@ bool check_quadraticity(double a)
 
 int calculate_linear_roots(double b, double c, double * ptr_x)
 {
+	int quantity_of_roots = 0;
+
 	if (is_num_zero(b) == 1 && is_num_zero(c) == 1)
-			return 8;
+	{
+		quantity_of_roots = infinity;
+	}
 	else if (is_num_zero(b) == 1 && is_num_zero(c) == 0)
-			return 0;
+			quantity_of_roots = no_roots;
 	else if (is_num_zero(b) == 0)
 	{
 			*ptr_x = - c / b;
-			return 1;
+			quantity_of_roots = one_root;
 	}
+	
+	return quantity_of_roots;
 }
 
 
@@ -104,28 +115,35 @@ int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, dou
 	*ptr_x1 = (- b + sqr_discr) / 2 / a;
 	*ptr_x2 = (- b - sqr_discr) / 2 / a;
 	
+	int quantity_of_roots = 0;
+	
 	if (discriminant < 0)
-		return 0;
+		quantity_of_roots = no_roots;
+
 	else if (is_num_zero(discriminant) == 1)
-		return 1;
+		quantity_of_roots = one_root;
 	else
-		return 2;
+		quantity_of_roots = two_roots;
+
+	return quantity_of_roots;
 }
 
 void output_roots(double x1, double x2, int quantity_of_roots)
 {
+
 	switch(quantity_of_roots)
 	{
-		case 0: printf("Уравнение не имеет решений\n");
+		case no_roots: printf("Уравнение не имеет решений\n");
 			break;
-		case 1: printf("Уравнение имеет одно решение: %.2f\n", x1);
+		case one_root: printf("Уравнение имеет одно решение: %.2f\n", x1);
 			break;
-		case 2: printf("Уравнение имеет два решения: %.2f и %.2f\n", x1, x2);
+		case two_roots: printf("Уравнение имеет два решения: %.2f и %.2f\n", x1, x2);
 			break;
-		case 8: printf("Уравнение имеет бесконечное множество решений\n");
+		case infinity: printf("Уравнение имеет бесконечное множество решений\n");
 			break;
 	}
 }
+
 
 
 
