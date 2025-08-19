@@ -8,6 +8,7 @@ int calculate_roots(double a, double b, double c, double * ptr_x1, double * ptr_
 int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c);
 int check_quadraticity(double a, double b, double c);
 void output_roots(double x1, double x2, int quantity_of_roots);
+int coefficient_0_or_not(double n);
 
 
 int main(void)
@@ -27,18 +28,28 @@ int main(void)
 	return 0;
 }
 
+int coefficient_0_or_not(double n)
+{
+	if ((- 0.00001 < (n - 0)) && ((n - 0) < 0.00001))
+		return 1;
+	else
+		return 0;
+}
+
 
 int check_quadraticity(double a, double b, double c)
 {
-	if (a == 0.0 && b == 0.0 && c == 0.0)
+	if (coefficient_0_or_not(a) == 1 && coefficient_0_or_not(b) == 1 && coefficient_0_or_not(c) == 1)
 		printf("Уравнение имеет бесконечное множество решений\n");
-	else if (a == 0.0 && b == 0.0 && c != 0.0)
+	else if (coefficient_0_or_not(a) == 1 && coefficient_0_or_not(b) == 1 && coefficient_0_or_not(c) == 0)
 		printf("Уравнение не имеет решений\n");
-	else if (a == 0.0 && b != 0.0)
+	else if (coefficient_0_or_not(a) == 1 && coefficient_0_or_not(b) == 0)
 		printf("Уравнение имеет одно решение: %lf\n", -c/b);
 
-	if (a != 0.0)
+	if (coefficient_0_or_not(a) == 0)
 		return 1;
+	else
+		return 0;
 }
 
 
@@ -62,6 +73,8 @@ int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c)
 		printf("Ошибка. Попробуйте ещё раз.");
 		return 0;
 	}
+	else
+		return 1;
 }
 
 
@@ -76,7 +89,7 @@ int calculate_roots(double a, double b, double c, double * ptr_x1, double * ptr_
 	
 	if (discriminant < 0)
 		return 0;
-	else if (discriminant == 0)
+	else if (coefficient_0_or_not(discriminant) == 1)
 		return 1;
 	else
 		return 2;
@@ -91,6 +104,7 @@ void output_roots(double x1, double x2, int quantity_of_roots)
 	else if (quantity_of_roots == 2)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", x1, x2);
 }
+
 
 
 
