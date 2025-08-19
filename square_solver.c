@@ -16,7 +16,15 @@ int coefficient_0_or_not(double n);
 int main(void)
 {
 	double a, b, c, x1, x2;
+	a = 0.0;
+	b = 0.0;
+	c = 0.0;
+	x1 = 0.0;
+	x2 = 0.0;
+	
 	int quantity_of_roots_sqr, quantity_of_roots_lin;
+	quantity_of_roots_sqr = 0;
+	quantity_of_roots_lin = 0;
 
 	if (get_coefficients(&a, &b, &c) != 0)
 	{
@@ -129,6 +137,7 @@ void output_quadratic_roots(double x1, double x2, int quantity_of_roots_sqr)
 	else if (quantity_of_roots_sqr == 2)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", x1, x2);
 }
+
 
 
 
