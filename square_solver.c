@@ -5,17 +5,14 @@
 #include <math.h>
 #include <stdbool.h>
 
-#define no_roots 0
-#define one_root 1
-#define two_roots 2
-#define infinity 8
-
 int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, double * ptr_x2);
 int calculate_linear_roots(double b, double c, double * ptr_x);
 int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c);
 bool check_quadraticity(double a);
 void output_roots(double x1, double x2, int quantity_of_roots);
 int is_num_zero(double n);
+
+enum roots{no_roots, one_root, two_roots, infinity};
 
 
 int main(void)
@@ -143,6 +140,7 @@ void output_roots(double x1, double x2, int quantity_of_roots)
 			break;
 	}
 }
+
 
 
 
