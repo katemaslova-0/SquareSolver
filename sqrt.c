@@ -5,7 +5,7 @@
 #include <math.h>
 
 int calc(double a, double b, double c, double * ptr_x1, double * ptr_x2);
-int get_number(double * ptr);
+int get_numbers(double * ptr_a, double * ptr_b, double * ptr_c);
 int check(double a, double b, double c);
 void output(double x1, double x2, int quantity_of_roots);
 
@@ -26,24 +26,15 @@ int main(void)
 	ptr_x1 = &x1;
 	ptr_x2 = &x2;
 
-	
-	printf("Введите коэффициент при x^2: ");
-	if (get_number(ptr_a) != 0)
+	if (get_numbers(ptr_a, ptr_b, ptr_c) != 0)
 	{
-		printf("Введите коэффициент при x: ");
-		if (get_number(ptr_b) != 0)
+		if (check(a, b, c) == 1)
 		{
-			printf("Введите свободный член: ");
-			if (get_number(ptr_c) != 0)
-			{
-				if (check(a, b, c) == 1)
-				{
-					quantity_of_roots = calc(a, b, c, ptr_x1, ptr_x2);
-					output(x1, x2, quantity_of_roots);
-				}
-			}
+			quantity_of_roots = calc(a, b, c, ptr_x1, ptr_x2);
+			output(x1, x2, quantity_of_roots);
 		}
 	}
+
 	return 0;
 }
 
@@ -51,7 +42,7 @@ int main(void)
 int check(double a, double b, double c)
 {
 	if (a == 0.0 && b == 0.0 && c == 0.0)
-		printf("Уравнение не имеет бесконечное множество решений\n");
+		printf("Уравнение имеет бесконечное множество решений\n");
 	else if (a == 0.0 && b == 0.0 && c != 0.0)
 		printf("Уравнение не имеет решений\n");
 	else if (a == 0.0 && b != 0.0)
@@ -62,15 +53,26 @@ int check(double a, double b, double c)
 }
 
 
-int get_number(double * ptr)
+int get_numbers(double * ptr_a, double * ptr_b, double * ptr_c)
 {
-	if (scanf("%lf", ptr) != 1)
+	printf("Введите коэффициент при х^2: ");
+	if (scanf("%lf", ptr_a) != 1)
 	{
 		printf("Ошибка. Попробуйте ещё раз.");
 		return 0;
 	}
-	else
-		return 1;
+	printf("Введите коэффициент при х: ");
+	if (scanf("%lf", ptr_b) != 1)
+	{
+		printf("Ошибка. Попробуйте ещё раз.");
+		return 0;
+	}
+	printf("Введите свободный член: ");
+	if (scanf("%lf", ptr_c) != 1)
+	{
+		printf("Ошибка. Попробуйте ещё раз.");
+		return 0;
+	}
 }
 
 
@@ -100,7 +102,6 @@ void output(double x1, double x2, int quantity_of_roots)
 	else if (quantity_of_roots == 2)
 	printf("Уравнение имеет два решения: %.2f и %.2f\n", x1, x2);
 }
-
 
 
 
