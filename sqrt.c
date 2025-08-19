@@ -7,7 +7,7 @@
 int calc(double a, double b, double c, double * ptr_x1, double * ptr_x2);
 int get_number(double * ptr);
 int check(double a, double b, double c);
-void output(double * ptr_x1, double * ptr_x2, int quantity_of_roots);
+void output(double x1, double x2, int quantity_of_roots);
 
 
 int main(void)
@@ -39,7 +39,7 @@ int main(void)
 				if (check(a, b, c) == 1)
 				{
 					quantity_of_roots = calc(a, b, c, ptr_x1, ptr_x2);
-					output(ptr_x1, ptr_x2, quantity_of_roots);
+					output(x1, x2, quantity_of_roots);
 				}
 			}
 		}
@@ -91,15 +91,16 @@ int calc(double a, double b, double c, double * ptr_x1, double * ptr_x2)
 		return 2;
 }
 
-void output(double * ptr_x1, double * ptr_x2, int quantity_of_roots)
+void output(double x1, double x2, int quantity_of_roots)
 {
 	if (quantity_of_roots == 0)
 	printf("Уравнение не имеет решений\n");
 	else if (quantity_of_roots == 1)
-	printf("Уравнение имеет одно решение: %.2f\n", *ptr_x1);
+	printf("Уравнение имеет одно решение: %.2f\n", x1);
 	else if (quantity_of_roots == 2)
-	printf("Уравнение имеет два решения: %.2f и %.2f\n", *ptr_x1, *ptr_x2);
+	printf("Уравнение имеет два решения: %.2f и %.2f\n", x1, x2);
 }
+
 
 
 
