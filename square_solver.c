@@ -7,7 +7,7 @@
 
 int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, double * ptr_x2);
 int calculate_linear_roots(double b, double c, double * ptr_x);
-int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c);
+bool get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c);
 bool check_quadraticity(double a);
 void output_roots(double x1, double x2, int quantity_of_roots);
 bool is_num_zero(double n);
@@ -26,7 +26,7 @@ int main(void)
 
 	if (get_coefficients(&a, &b, &c) != 0)
 	{
-		if (check_quadraticity(a) == 1)
+		if (check_quadraticity(a) == true)
 		{
 			int quantity_of_roots = calculate_quadratic_roots(a, b, c, &x1, &x2);
 			output_roots(x1, x2, quantity_of_roots);
@@ -44,9 +44,9 @@ int main(void)
 
 bool is_num_zero(double n)
 {
-	if ((- 0.00001 < (n - 0)) && ((n - 0) < 0.00001))
+	if (fabs(n - 0) < 0.00001)
 		return true;
-		
+
 	else
 		return false;
 }
@@ -56,35 +56,39 @@ bool check_quadraticity(double a)
 {
 	if (is_num_zero(a) == 0)
 		return true;
+
 	else
 		return false;
 }
+
 
 int calculate_linear_roots(double b, double c, double * ptr_x)
 {
 	int quantity_of_roots = 0;
 
 	if (is_num_zero(b) == true && is_num_zero(c) == true)
-	{
 		quantity_of_roots = kInfinity;
-	}
+
 	else if (is_num_zero(b) == true && is_num_zero(c) == false)
 			quantity_of_roots = kNoRoots;
+
 	else if (is_num_zero(b) == false)
 	{
 			*ptr_x = - c / b;
 			quantity_of_roots = kOneRoot;
 	}
-	
+
 	return quantity_of_roots;
 }
 
-int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c)
+
+bool get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c)
 {
 	printf("Введите коэффициент при х^2: ");
+
 	while (scanf("%lf", ptr_a) != 1)
 	{
-		printf("Ошибка. Попробуйте ещё раз.");
+		printf("Ошибка. Попробуйте ещё раз. Введите коэффициент при x^2: ");
 		while (getchar() != '\n')
 			continue;
 	}
@@ -92,13 +96,14 @@ int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c)
 	if (getchar() != '\n')
 	{
 		printf("Ошибка. Попробуйте ещё раз.");
-		return 0;
+		return false;
 	}
 
 	printf("Введите коэффициент при х: ");
+
 	while (scanf("%lf", ptr_b) != 1)
 	{
-		printf("Ошибка. Попробуйте ещё раз.");
+		printf("Ошибка. Попробуйте ещё раз. Введите коэффициент при x: ");
 		while (getchar() != '\n')
 			continue;
 	}
@@ -106,13 +111,14 @@ int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c)
 	if (getchar() != '\n')
 	{
 		printf("Ошибка. Попробуйте ещё раз.");
-		return 0;
+		return false;
 	}
 
 	printf("Введите свободный член: ");
+
 	while (scanf("%lf", ptr_c) != 1)
 	{
-		printf("Ошибка. Попробуйте ещё раз.");
+		printf("Ошибка. Попробуйте ещё раз. Введите свободный член: ");
 		while (getchar() != '\n')
 			continue;
 	}
@@ -120,10 +126,10 @@ int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c)
 	if (getchar() != '\n')
 	{
 		printf("Ошибка. Попробуйте ещё раз.");
-		return 0;
+		return false;
 	}
 
-	return 1;
+	return true;
 }
 
 
@@ -131,8 +137,10 @@ int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, dou
 {
 	double discriminant = b * b - 4 * a * c;
 	double sqr_discr = 0.0;
+
 	if (discriminant >= 0)
 		sqr_discr = sqrt(discriminant);
+
 	*ptr_x1 = (- b + sqr_discr) / 2 / a;
 	*ptr_x2 = (- b - sqr_discr) / 2 / a;
 	
@@ -149,9 +157,9 @@ int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, dou
 	return quantity_of_roots;
 }
 
+
 void output_roots(double x1, double x2, int quantity_of_roots)
 {
-
 	switch(quantity_of_roots)
 	{
 		case kNoRoots: printf("Уравнение не имеет решений\n");
@@ -162,8 +170,10 @@ void output_roots(double x1, double x2, int quantity_of_roots)
 			break;
 		case kInfinity: printf("Уравнение имеет бесконечное множество решений\n");
 			break;
+		default: printf("Ошибка");
 	}
 }
+
 
 
 
