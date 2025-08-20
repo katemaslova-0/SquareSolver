@@ -9,11 +9,11 @@ enum Roots{kNoRoots, kOneRoot, kTwoRoots, kInfinity, kStart};
 
 Roots calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, double * ptr_x2);
 Roots calculate_linear_roots(double b, double c, double * ptr_x);
-bool get_coefficient(double * ptr);
+void get_coefficient(double * ptr);
 bool check_quadraticity(double a);
 void output_roots(double x1, double x2, Roots quantity_of_roots);
 bool is_num_zero(double n);
-
+void get_function_for_coefficients(double * ptr_a, double * ptr_b, double * ptr_c);
 
 
 int main(void)
@@ -23,33 +23,24 @@ int main(void)
 	double c = 0.0;
 	double x1 = 0.0;
 	double x2 = 0.0;
-	
-	printf("Введите коэффициент при х^2: ");
-	bool if_a = get_coefficient(&a);
 
-	printf("Введите коэффициент при x: ");
-	bool if_b = get_coefficient(&b);
+	get_function_for_coefficients(&a, &b, &c);
 
-	printf("Введите свободный член: ");
-	bool if_c = get_coefficient(&c);
-
-	if (if_a == true && if_b == true && if_c == true)
+	if (check_quadraticity(a) == true)
 	{
-		if (check_quadraticity(a) == true)
-		{
-			Roots quantity_of_roots = calculate_quadratic_roots(a, b, c, &x1, &x2);
-			output_roots(x1, x2, quantity_of_roots);
-		}
+		Roots quantity_of_roots = calculate_quadratic_roots(a, b, c, &x1, &x2);
+		output_roots(x1, x2, quantity_of_roots);
+	}
 			
-		else
-		{
-			Roots quantity_of_roots = calculate_linear_roots(b, c, &x1);
-			output_roots(x1, x2, quantity_of_roots);
-		}
+	else
+	{
+		Roots quantity_of_roots = calculate_linear_roots(b, c, &x1);
+		output_roots(x1, x2, quantity_of_roots);
 	}
 
 	return 0;
 }
+
 
 bool is_num_zero(double n)
 {
@@ -91,17 +82,14 @@ Roots calculate_linear_roots(double b, double c, double * ptr_x)
 }
 
 
-bool get_coefficient(double * ptr)
+void get_coefficient(double * ptr)
 {
-
 	while (scanf("%lf", ptr) != 1 || getchar() != '\n')
 	{
 		printf("Ошибка. Введите ещё раз: ");
 		while (getchar() != '\n')
 			continue;
 	}
-
-	return true;
 }
 
 
@@ -112,9 +100,6 @@ Roots calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, d
 
 	if (discriminant >= 0)
 		sqr_discr = sqrt(discriminant);
-
-	*ptr_x1 = (- b + sqr_discr) / 2 / a;
-	*ptr_x2 = (- b - sqr_discr) / 2 / a;
 	
 	Roots quantity_of_roots = kStart;
 	
@@ -122,9 +107,16 @@ Roots calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, d
 		quantity_of_roots = kNoRoots;
 
 	else if (is_num_zero(discriminant) == true)
+	{
 		quantity_of_roots = kOneRoot;
+		*ptr_x1 = (- b + sqr_discr) / 2 / a;
+	}
 	else
+	{
 		quantity_of_roots = kTwoRoots;
+		*ptr_x1 = (- b + sqr_discr) / 2 / a;
+		*ptr_x2 = (- b - sqr_discr) / 2 / a;
+	}
 
 	return quantity_of_roots;
 }
@@ -147,6 +139,20 @@ void output_roots(double x1, double x2, Roots quantity_of_roots)
 		default: printf("Ошибка");
 	}
 }
+
+
+void get_function_for_coefficients(double * ptr_a, double * ptr_b, double * ptr_c)
+{
+	printf("Введите коэффициент при х^2: ");
+	get_coefficient(ptr_a);
+
+	printf("Введите коэффициент при x: ");
+	get_coefficient(ptr_b);
+
+	printf("Введите свободный член: ");
+	get_coefficient(ptr_c);
+}
+
 
 
 
