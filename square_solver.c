@@ -10,7 +10,7 @@ int calculate_linear_roots(double b, double c, double * ptr_x);
 int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c);
 bool check_quadraticity(double a);
 void output_roots(double x1, double x2, int quantity_of_roots);
-int is_num_zero(double n);
+bool is_num_zero(double n);
 
 enum roots{no_roots, one_root, two_roots, infinity};
 
@@ -41,12 +41,12 @@ int main(void)
 	return 0;
 }
 
-int is_num_zero(double n)
+bool is_num_zero(double n)
 {
 	if ((- 0.00001 < (n - 0)) && ((n - 0) < 0.00001))
-		return 1;
+		return true;
 	else
-		return 0;
+		return false;
 }
 
 
@@ -62,13 +62,13 @@ int calculate_linear_roots(double b, double c, double * ptr_x)
 {
 	int quantity_of_roots = 0;
 
-	if (is_num_zero(b) == 1 && is_num_zero(c) == 1)
+	if (is_num_zero(b) == true && is_num_zero(c) == true)
 	{
 		quantity_of_roots = infinity;
 	}
-	else if (is_num_zero(b) == 1 && is_num_zero(c) == 0)
+	else if (is_num_zero(b) == true && is_num_zero(c) == false)
 			quantity_of_roots = no_roots;
-	else if (is_num_zero(b) == 0)
+	else if (is_num_zero(b) == false)
 	{
 			*ptr_x = - c / b;
 			quantity_of_roots = one_root;
@@ -139,7 +139,7 @@ int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, dou
 	if (discriminant < 0)
 		quantity_of_roots = no_roots;
 
-	else if (is_num_zero(discriminant) == 1)
+	else if (is_num_zero(discriminant) == true)
 		quantity_of_roots = one_root;
 	else
 		quantity_of_roots = two_roots;
@@ -162,6 +162,7 @@ void output_roots(double x1, double x2, int quantity_of_roots)
 			break;
 	}
 }
+
 
 
 
