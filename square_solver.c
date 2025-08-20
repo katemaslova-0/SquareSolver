@@ -7,7 +7,7 @@
 
 int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, double * ptr_x2);
 int calculate_linear_roots(double b, double c, double * ptr_x);
-bool get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c);
+bool get_coefficient(double * ptr);
 bool check_quadraticity(double a);
 void output_roots(double x1, double x2, int quantity_of_roots);
 bool is_num_zero(double n);
@@ -22,9 +22,17 @@ int main(void)
 	double c = 0.0;
 	double x1 = 0.0;
 	double x2 = 0.0;
+	
+	printf("Введите коэффициент при х^2: ");
+	bool if_a = get_coefficient(&a);
 
+	printf("Введите коэффициент при x: ");
+	bool if_b = get_coefficient(&b);
 
-	if (get_coefficients(&a, &b, &c) != 0)
+	printf("Введите свободный член: ");
+	bool if_c = get_coefficient(&c);
+
+	if (if_a == true && if_b == true && if_c == true)
 	{
 		if (check_quadraticity(a) == true)
 		{
@@ -82,51 +90,14 @@ int calculate_linear_roots(double b, double c, double * ptr_x)
 }
 
 
-bool get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c)
+bool get_coefficient(double * ptr)
 {
-	printf("Введите коэффициент при х^2: ");
 
-	while (scanf("%lf", ptr_a) != 1)
+	while (scanf("%lf", ptr) != 1 || getchar() != '\n')
 	{
-		printf("Ошибка. Попробуйте ещё раз. Введите коэффициент при x^2: ");
+		printf("Ошибка. Введите ещё раз: ");
 		while (getchar() != '\n')
 			continue;
-	}
-
-	if (getchar() != '\n')
-	{
-		printf("Ошибка. Попробуйте ещё раз.");
-		return false;
-	}
-
-	printf("Введите коэффициент при х: ");
-
-	while (scanf("%lf", ptr_b) != 1)
-	{
-		printf("Ошибка. Попробуйте ещё раз. Введите коэффициент при x: ");
-		while (getchar() != '\n')
-			continue;
-	}
-
-	if (getchar() != '\n')
-	{
-		printf("Ошибка. Попробуйте ещё раз.");
-		return false;
-	}
-
-	printf("Введите свободный член: ");
-
-	while (scanf("%lf", ptr_c) != 1)
-	{
-		printf("Ошибка. Попробуйте ещё раз. Введите свободный член: ");
-		while (getchar() != '\n')
-			continue;
-	}
-
-	if (getchar() != '\n')
-	{
-		printf("Ошибка. Попробуйте ещё раз.");
-		return false;
 	}
 
 	return true;
@@ -173,6 +144,7 @@ void output_roots(double x1, double x2, int quantity_of_roots)
 		default: printf("Ошибка");
 	}
 }
+
 
 
 
