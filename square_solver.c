@@ -5,14 +5,15 @@
 #include <math.h>
 #include <stdbool.h>
 
-int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, double * ptr_x2);
-int calculate_linear_roots(double b, double c, double * ptr_x);
+enum Roots{kNoRoots, kOneRoot, kTwoRoots, kInfinity, kStart};
+
+Roots calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, double * ptr_x2);
+Roots calculate_linear_roots(double b, double c, double * ptr_x);
 bool get_coefficient(double * ptr);
 bool check_quadraticity(double a);
-void output_roots(double x1, double x2, int quantity_of_roots);
+void output_roots(double x1, double x2, Roots quantity_of_roots);
 bool is_num_zero(double n);
 
-enum Roots{kNoRoots, kOneRoot, kTwoRoots, kInfinity};
 
 
 int main(void)
@@ -36,13 +37,13 @@ int main(void)
 	{
 		if (check_quadraticity(a) == true)
 		{
-			int quantity_of_roots = calculate_quadratic_roots(a, b, c, &x1, &x2);
+			Roots quantity_of_roots = calculate_quadratic_roots(a, b, c, &x1, &x2);
 			output_roots(x1, x2, quantity_of_roots);
 		}
 			
 		else
 		{
-			int quantity_of_roots = calculate_linear_roots(b, c, &x1);
+			Roots quantity_of_roots = calculate_linear_roots(b, c, &x1);
 			output_roots(x1, x2, quantity_of_roots);
 		}
 	}
@@ -70,9 +71,9 @@ bool check_quadraticity(double a)
 }
 
 
-int calculate_linear_roots(double b, double c, double * ptr_x)
+Roots calculate_linear_roots(double b, double c, double * ptr_x)
 {
-	int quantity_of_roots = 0;
+	Roots quantity_of_roots = kStart;
 
 	if (is_num_zero(b) == true && is_num_zero(c) == true)
 		quantity_of_roots = kInfinity;
@@ -104,7 +105,7 @@ bool get_coefficient(double * ptr)
 }
 
 
-int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, double * ptr_x2)
+Roots calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, double * ptr_x2)
 {
 	double discriminant = b * b - 4 * a * c;
 	double sqr_discr = 0.0;
@@ -115,7 +116,7 @@ int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, dou
 	*ptr_x1 = (- b + sqr_discr) / 2 / a;
 	*ptr_x2 = (- b - sqr_discr) / 2 / a;
 	
-	int quantity_of_roots = 0;
+	Roots quantity_of_roots = kStart;
 	
 	if (discriminant < 0)
 		quantity_of_roots = kNoRoots;
@@ -129,7 +130,7 @@ int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, dou
 }
 
 
-void output_roots(double x1, double x2, int quantity_of_roots)
+void output_roots(double x1, double x2, Roots quantity_of_roots)
 {
 	switch(quantity_of_roots)
 	{
@@ -141,9 +142,12 @@ void output_roots(double x1, double x2, int quantity_of_roots)
 			break;
 		case kInfinity: printf("Уравнение имеет бесконечное множество решений\n");
 			break;
+		case kStart: printf("Ошибка");
+			break;
 		default: printf("Ошибка");
 	}
 }
+
 
 
 
