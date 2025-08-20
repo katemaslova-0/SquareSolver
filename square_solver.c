@@ -12,7 +12,7 @@ bool check_quadraticity(double a);
 void output_roots(double x1, double x2, int quantity_of_roots);
 bool is_num_zero(double n);
 
-enum roots{no_roots, one_root, two_roots, infinity};
+enum Roots{kNoRoots, kOneRoot, kTwoRoots, kInfinity};
 
 
 int main(void)
@@ -31,6 +31,7 @@ int main(void)
 			int quantity_of_roots = calculate_quadratic_roots(a, b, c, &x1, &x2);
 			output_roots(x1, x2, quantity_of_roots);
 		}
+			
 		else
 		{
 			int quantity_of_roots = calculate_linear_roots(b, c, &x1);
@@ -45,6 +46,7 @@ bool is_num_zero(double n)
 {
 	if ((- 0.00001 < (n - 0)) && ((n - 0) < 0.00001))
 		return true;
+		
 	else
 		return false;
 }
@@ -64,14 +66,14 @@ int calculate_linear_roots(double b, double c, double * ptr_x)
 
 	if (is_num_zero(b) == true && is_num_zero(c) == true)
 	{
-		quantity_of_roots = infinity;
+		quantity_of_roots = kInfinity;
 	}
 	else if (is_num_zero(b) == true && is_num_zero(c) == false)
-			quantity_of_roots = no_roots;
+			quantity_of_roots = kNoRoots;
 	else if (is_num_zero(b) == false)
 	{
 			*ptr_x = - c / b;
-			quantity_of_roots = one_root;
+			quantity_of_roots = kOneRoot;
 	}
 	
 	return quantity_of_roots;
@@ -137,12 +139,12 @@ int calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, dou
 	int quantity_of_roots = 0;
 	
 	if (discriminant < 0)
-		quantity_of_roots = no_roots;
+		quantity_of_roots = kNoRoots;
 
 	else if (is_num_zero(discriminant) == true)
-		quantity_of_roots = one_root;
+		quantity_of_roots = kOneRoot;
 	else
-		quantity_of_roots = two_roots;
+		quantity_of_roots = kTwoRoots;
 
 	return quantity_of_roots;
 }
@@ -152,16 +154,17 @@ void output_roots(double x1, double x2, int quantity_of_roots)
 
 	switch(quantity_of_roots)
 	{
-		case no_roots: printf("Уравнение не имеет решений\n");
+		case kNoRoots: printf("Уравнение не имеет решений\n");
 			break;
-		case one_root: printf("Уравнение имеет одно решение: %.2f\n", x1);
+		case kOneRoot: printf("Уравнение имеет одно решение: %.2f\n", x1);
 			break;
-		case two_roots: printf("Уравнение имеет два решения: %.2f и %.2f\n", x1, x2);
+		case kTwoRoots: printf("Уравнение имеет два решения: %.2f и %.2f\n", x1, x2);
 			break;
-		case infinity: printf("Уравнение имеет бесконечное множество решений\n");
+		case kInfinity: printf("Уравнение имеет бесконечное множество решений\n");
 			break;
 	}
 }
+
 
 
 
