@@ -77,29 +77,51 @@ int calculate_linear_roots(double b, double c, double * ptr_x)
 	return quantity_of_roots;
 }
 
-
 int get_coefficients(double * ptr_a, double * ptr_b, double * ptr_c)
 {
 	printf("Введите коэффициент при х^2: ");
-	if (scanf("%lf", ptr_a) != 1)
+	while (scanf("%lf", ptr_a) != 1)
+	{
+		printf("Ошибка. Попробуйте ещё раз.");
+		while (getchar() != '\n')
+			continue;
+	}
+
+	if (getchar() != '\n')
 	{
 		printf("Ошибка. Попробуйте ещё раз.");
 		return 0;
 	}
+
 	printf("Введите коэффициент при х: ");
-	if (scanf("%lf", ptr_b) != 1)
+	while (scanf("%lf", ptr_b) != 1)
+	{
+		printf("Ошибка. Попробуйте ещё раз.");
+		while (getchar() != '\n')
+			continue;
+	}
+
+	if (getchar() != '\n')
 	{
 		printf("Ошибка. Попробуйте ещё раз.");
 		return 0;
 	}
+
 	printf("Введите свободный член: ");
-	if (scanf("%lf", ptr_c) != 1)
+	while (scanf("%lf", ptr_c) != 1)
+	{
+		printf("Ошибка. Попробуйте ещё раз.");
+		while (getchar() != '\n')
+			continue;
+	}
+
+	if (getchar() != '\n')
 	{
 		printf("Ошибка. Попробуйте ещё раз.");
 		return 0;
 	}
-	else
-		return 1;
+
+	return 1;
 }
 
 
