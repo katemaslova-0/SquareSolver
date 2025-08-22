@@ -44,7 +44,7 @@ int main(void)
 
 bool is_num_zero(double n)
 {
-	if (fabs(n - 0) < 0.00001)
+	if (fabs (n < 0.00001)
 		return true;
 
 	else
@@ -54,7 +54,7 @@ bool is_num_zero(double n)
 
 bool check_quadraticity(double a)
 {
-	if (is_num_zero(a) == 0)
+	if (is_num_zero(a))
 		return true;
 
 	else
@@ -152,6 +152,7 @@ void get_function_for_coefficients(double * ptr_a, double * ptr_b, double * ptr_
 	printf("Введите свободный член: ");
 	get_coefficient(ptr_c);
 }
+
 
 
 
