@@ -10,7 +10,6 @@
 #include "Input.h"
 #include "Check.h"
 
-
 Input choose_type_of_input(void)
 {
     printf("Введите 0 для ввода с клавиатуры, 1 - для файлового ввода: ");
@@ -48,7 +47,7 @@ bool convert_int_to_input(int type_of_input_int, Input * type_of_input)
                 break;
         case kFileInput: *type_of_input = kFileInput;
                 break;
-        default: printf("Incorrect input type");
+        default: printf("Incorrect input type ");
                 return false;
     }
     return true;

@@ -20,6 +20,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include <cassert>
+#include <cstring>
 
 #include "Input.h"
 #include "Solve.h"
@@ -27,34 +28,39 @@
 #include "TestSolveSquare.h"
 #include "Data.h"
 #include "Type.h"
+#include "Check.h"
 
-int main(void)
+int main(int argc, const char * argv[])
 {
 	double a = 0.0, b = 0.0, c = 0.0;
 	double x1 = 0.0, x2 = 0.0;
+	bool if_flags = false;
+	bool if_cf_correct = true;
+	bool n = false;
 
-	if (RunTests() == false)
-	{
+	if ((n = check_flags(&if_cf_correct, if_flags, argv, argc, &a, &b, &c)) == true && if_cf_correct == false)
 		return -1;
+	if (n == true && if_cf_correct == true)
+	{
+		Roots quantity_of_roots = solve_square(a, b, c, &x1, &x2);
+		output_roots(x1, x2, quantity_of_roots);
 	}
 
-	Input type_of_input = choose_type_of_input();
-
-	if (type_of_input == kDefaultInput)
+	if (n == false)
 	{
-		return -1;
-	}
+		Input type_of_input = choose_type_of_input();
 
-	if (get_coefficients(type_of_input, &a, &b, &c) == false)
-	{
-		return -1;
-	}
+		if (type_of_input == kDefaultInput)
+			return -1;
 
-	Roots quantity_of_roots = solve_square(a, b, c, &x1, &x2);
-	output_roots(x1, x2, quantity_of_roots);
+		if (get_coefficients(type_of_input, &a, &b, &c) == false)
+			return -1;
+
+		Roots quantity_of_roots = solve_square(a, b, c, &x1, &x2);
+		output_roots(x1, x2, quantity_of_roots);
+	}
 
 	return 0;
 }
-
 
 

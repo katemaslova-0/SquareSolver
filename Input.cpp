@@ -7,10 +7,9 @@
 
 #include "Input.h"
 
-#define ANSI_COLOR_RED "\033[0;31m"
-#define ANSI_COLOR_GREEN "\033[0;32m"
+#define ANSI_COLOR_RED    "\033[0;31m"
+#define ANSI_COLOR_GREEN  "\033[0;32m"
 #define ANSI_COLOR_YELLOW "\033[1;33m"
-
 
 bool get_coefficients(Input type_of_input, double * ptr_a, double * ptr_b, double * ptr_c)
 {
@@ -110,8 +109,37 @@ bool get_from_file(double * ptr_a, double * ptr_b, double * ptr_c)
 }
 
 
+void get_from_command_line(bool * ptr_if_cf_correct, int cnt, const char * argv[], double * ptr_a, double * ptr_b, double * ptr_c)
+{
+	assert(ptr_if_cf_correct != NULL);
+	assert(argv != NULL);
+	assert(ptr_a != NULL);
+	assert(ptr_b != NULL);
+	assert(ptr_c != NULL);
+
+	char * endptrA = NULL;
+	char * endptrB = NULL;
+	char * endptrC = NULL;
+
+	if ((strtod(argv[cnt + 1], &endptrA) == 0 && *endptrA != '\0')
+	|| (strtod(argv[cnt + 2],  &endptrB) == 0 && *endptrB != '\0')
+	|| (strtod(argv[cnt + 3], &endptrC) == 0 && *endptrC != '\0'))
+	{
+		printf("Коэффициенты введены некорректно");
+		*ptr_if_cf_correct = false;
+	}
+	else
+	{
+		*ptr_a = atof(argv[cnt + 1]);
+		*ptr_b = atof(argv[cnt + 2]);
+		*ptr_c = atof(argv[cnt + 3]);
+	}
+}
+
+
 void clear_buffer(void)
 {
 	while (getchar() != '\n')
 		continue;
 }
+

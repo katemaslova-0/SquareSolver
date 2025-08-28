@@ -1,5 +1,6 @@
 #ifndef SQUARE_SOLVER_INPUT_H
 #define SQUARE_SOLVER_INPUT_H
+
 #include "Data.h"
 
 /*
@@ -64,7 +65,21 @@ bool get_number_from_file(double * ptr);
 bool get_from_file(double * ptr_a, double * ptr_b, double * ptr_c);
 
 
+/*
+* @brief Очищает буфер
+*/
 void clear_buffer(void);
+
+
+/*
+* @brief Получает коэффициенты уравнения из командной строки
+*
+* @param [in] argc Суммарное количество аргументов командной строки
+* @param [out] ptr_a Указатель на коэффициент при x^2
+* @param [out] ptr_b Указатель на коэффициент при x
+* @param [out] ptr_c Указатель на свободный член
+*/
+void get_from_command_line(bool * ptr_if_cf_correct, int cnt, const char * argv[], double * ptr_a, double * ptr_b, double * ptr_c);
 
 #endif //SQUARE_SOLVER_INPUT_H
 

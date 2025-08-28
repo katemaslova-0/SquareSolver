@@ -1,6 +1,8 @@
 #ifndef SQUARE_SOLVER_OUTPUT_H
 #define SQUARE_SOLVER_OUTPUT_H
+
 #include "Data.h"
+
 /*
 * @brief Выводит корни уравнения
 *

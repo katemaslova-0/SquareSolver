@@ -1,5 +1,6 @@
 #ifndef SQUARE_SOLVER_CHECK_H
 #define SQUARE_SOLVER_CHECK_H
+
 #include "Data.h"
 
 /*
@@ -23,6 +24,9 @@ bool check_square(double a);
 *
 */
 bool is_num_zero(double n);
+
+bool check_flags(bool * ptr_if_cf_correct, bool if_flags, const char * argv[], int argc, double * ptr_a, double * ptr_b, double * ptr_c);
+
 
 #endif //SQUARE_SOLVER_CHECK_H
 

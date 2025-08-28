@@ -1,5 +1,6 @@
 #ifndef SQUARE_SOLVER_TYPE_H
 #define SQUARE_SOLVER_TYPE_H
+
 #include "Data.h"
 
 /*

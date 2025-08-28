@@ -24,7 +24,7 @@ void output_roots(double x1, double x2, Roots quantity_of_roots)
 			break;
 		case kInfinity: printf(ANSI_COLOR_BLUE "Уравнение имеет бесконечное множество решений\n");
 			break;
-		case kStart: printf("Ошибка");
+		case kStart: printf("Ошибка: не определилось количество корней");
 			break;
 		default: printf("Ошибка");
 	}

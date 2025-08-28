@@ -4,10 +4,10 @@
 #include <math.h>
 #include <stdbool.h>
 #include <cassert>
+
 #include "Check.h"
 #include "Solve.h"
 #include "Data.h"
-
 
 Roots solve_square(double a, double b, double c, double * ptr_x1, double * ptr_x2)
 {
@@ -38,10 +38,14 @@ Roots calculate_linear_roots(double b, double c, double * ptr_x)
 	Roots quantity_of_roots = kStart;
 
 	if (is_num_zero(b) == true && is_num_zero(c) == true)
+	{
 		quantity_of_roots = kInfinity;
+	}
 
 	else if (is_num_zero(b) == true && is_num_zero(c) == false)
+	{
 			quantity_of_roots = kNoRoots;
+	}
 
 	else if (is_num_zero(b) == false)
 	{
@@ -81,6 +85,7 @@ Roots calculate_quadratic_roots(double a, double b, double c, double * ptr_x1, d
 		quantity_of_roots = kOneRoot;
 		*ptr_x1 = (- b + sqr_discr) / 2 / a;
 	}
+
 	else
 	{
 		quantity_of_roots = kTwoRoots;
