@@ -25,8 +25,24 @@ bool check_square(double a);
 */
 bool is_num_zero(double n);
 
-bool check_flags(bool * ptr_if_cf_correct, bool if_flags, const char * argv[], int argc, double * ptr_a, double * ptr_b, double * ptr_c);
 
+/*
+* @brief Проверяет наличие флагов и запускает соответствующие каждому функции
+*
+* @param [in] argc Количество аргументов командной строки
+*
+* @param [out] ptr_if_cf_correct Указатель на корректность ввода коэффициентов
+* @param [out] argc[] Указатель на аргумент командной строки
+* @param [out] ptr_a Указатель на коэффициент при x^2
+* @param [out] ptr_b Указатель на коэффициент при x
+* @param [out] ptr_c Указатель на свободный член
+*
+* @return true, если есть флаг для коэффициентов, false в противном случае
+*/
+bool check_flags(bool * ptr_if_cf_correct, const char * argv[], int argc, double * ptr_a, double * ptr_b, double * ptr_c);
+
+
+void show_arguments(int argc, const char * argv[]);
 
 #endif //SQUARE_SOLVER_CHECK_H
 

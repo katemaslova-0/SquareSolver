@@ -34,19 +34,15 @@ int main(int argc, const char * argv[])
 {
 	double a = 0.0, b = 0.0, c = 0.0;
 	double x1 = 0.0, x2 = 0.0;
-	bool if_flags = false;
 	bool if_cf_correct = true;
-	bool n = false;
+	bool if_flags = false;
 
-	if ((n = check_flags(&if_cf_correct, if_flags, argv, argc, &a, &b, &c)) == true && if_cf_correct == false)
+	show_arguments(argc, argv);
+
+	if ((if_flags = check_flags(&if_cf_correct, argv, argc, &a, &b, &c)) == true && if_cf_correct == false)
 		return -1;
-	if (n == true && if_cf_correct == true)
-	{
-		Roots quantity_of_roots = solve_square(a, b, c, &x1, &x2);
-		output_roots(x1, x2, quantity_of_roots);
-	}
 
-	if (n == false)
+	if (if_flags == false)
 	{
 		Input type_of_input = choose_type_of_input();
 
@@ -55,7 +51,10 @@ int main(int argc, const char * argv[])
 
 		if (get_coefficients(type_of_input, &a, &b, &c) == false)
 			return -1;
+	}
 
+	if (if_cf_correct == true)
+	{
 		Roots quantity_of_roots = solve_square(a, b, c, &x1, &x2);
 		output_roots(x1, x2, quantity_of_roots);
 	}
