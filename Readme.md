@@ -44,20 +44,20 @@ make all
 
 ```C
 #define MY_ASSERT(cond, cond2) if (!cond) {fprintf(stderr,"\n\n%s\n\n\n------------------------\n\n\nError in file %s in line %d\n\n\n------------------------\n\n", cond2, __FILE__, __LINE__); \
-	printf("                  \n"); \
-	printf("              /\\       \n"); \
-	printf("             /  \\      \n"); \
-	printf("            /    \\          \n"); \
-	printf("    _______/  /\\  \\______ \n"); \
-	printf("    \\    ____/  \\____   /           \n"); \
+	printf("                              \n"); \
+	printf("              /\\             \n"); \
+	printf("             /  \\            \n"); \
+	printf("            /    \\           \n"); \
+	printf("    _______/  /\\  \\______   \n"); \
+	printf("    \\    ____/  \\____   /   \n"); \
 	printf("     \\   \\         /   /    \n"); \
-	printf("     /    /        \\   \\     \n"); \
-	printf("    /    /__      __\\   \\      \n"); \
-	printf("   /______  \\   /  ______\\              \n"); \
-	printf("          \\  \\ /  /                          \n"); \
-	printf("           \\     /                           \n"); \
-	printf("            \\   /                          \n"); \
-	printf("             \\ /                                \n\n \n"); \
+	printf("     /    /        \\   \\    \n"); \
+	printf("    /    /__      __\\   \\   \n"); \
+	printf("   /______  \\   /  ______\\  \n"); \
+	printf("          \\  \\ /  /         \n"); \
+	printf("           \\     /           \n"); \
+	printf("            \\   /            \n"); \
+	printf("             \\ /         \n\n\n"); \
 	abort(); \
 	}
 

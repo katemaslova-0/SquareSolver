@@ -48,7 +48,7 @@ bool get_from_console(double * ptr_a, double * ptr_b, double * ptr_c);
 * @return true, если коэффициент успешно считан,
 *		  false в обратном случае
 */
-bool get_number_from_file(double * ptr);
+bool get_number_from_file(FILE * fp, double * ptr);
 
 
 /*

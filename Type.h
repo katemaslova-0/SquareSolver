@@ -19,6 +19,8 @@ Input choose_type_of_input(void);
 */
 bool convert_int_to_input(int type_of_input_int, Input * type_of_input);
 
+bool get_flags(int * ptr_tag_count, int argc, const char * argv[], Flags * current_flags);
+
 #endif //SQUARE_SOLVER_TYPE_H
 
 

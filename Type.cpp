@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include <cassert>
+#include <cstring>
 
 #include "Data.h"
 #include "Type.h"
@@ -51,4 +52,35 @@ bool convert_int_to_input(int type_of_input_int, Input * type_of_input)
                 return false;
     }
     return true;
+}
+
+bool get_flags(int * ptr_tag_count, int argc, const char * argv[], Flags * current_flags)
+{
+    assert(ptr_tag_count != NULL);
+    assert(argv != NULL);
+    assert(current_flags != NULL);
+    assert(!isnan(argc));
+
+	int cnt_argc = argc;
+	int cnt = 0;
+
+	for (cnt = 0; cnt_argc > 0; cnt++, cnt_argc--)
+	{
+		if (strcmp(argv[cnt], "--help") == 0)
+			current_flags->show_flags = true;
+		if (strcmp(argv[cnt], "--test") == 0)
+			current_flags->test_flag = true;
+		if (strcmp(argv[cnt], "--cf") == 0)
+        {
+			current_flags->cf_flag = true;
+            *ptr_tag_count = cnt;
+        }
+	}
+
+    if (current_flags->show_flags == false
+     && current_flags->test_flag  == false
+     && current_flags->cf_flag    == false)
+        return false;
+    else
+        return true;
 }

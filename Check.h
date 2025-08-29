@@ -39,7 +39,7 @@ bool is_num_zero(double n);
 *
 * @return true, если есть флаг для коэффициентов, false в противном случае
 */
-bool check_flags(bool * ptr_if_cf_correct, const char * argv[], int argc, double * ptr_a, double * ptr_b, double * ptr_c);
+bool check_cf(int cnt, bool * ptr_if_cf_correct, const char * argv[], int argc, double * ptr_a, double * ptr_b, double * ptr_c);
 
 
 void show_arguments(int argc, const char * argv[]);

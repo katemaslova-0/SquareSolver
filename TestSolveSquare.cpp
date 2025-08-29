@@ -86,11 +86,11 @@ bool get_tests_from_file(TestData * tests_from_file, FILE * fp)
     assert(fp != NULL);
     assert(tests_from_file != NULL);
 
-    if (fscanf(fp, "%lg", &tests_from_file->a) != 1 ||
-        fscanf(fp, "%lg", &tests_from_file->b) != 1 ||
-        fscanf(fp, "%lg", &tests_from_file->c) != 1 ||
-        fscanf(fp, "%lg", &tests_from_file->x1_ref) != 1 ||
-        fscanf(fp, "%lg", &tests_from_file->x2_ref) != 1 ||
+    if (fscanf(fp, "%lg", &tests_from_file->a)                    != 1 ||
+        fscanf(fp, "%lg", &tests_from_file->b)                    != 1 ||
+        fscanf(fp, "%lg", &tests_from_file->c)                    != 1 ||
+        fscanf(fp, "%lg", &tests_from_file->x1_ref)               != 1 ||
+        fscanf(fp, "%lg", &tests_from_file->x2_ref)               != 1 ||
         fscanf(fp, "%d", &tests_from_file->quantity_of_roots_ref) != 1)
     {
         printf("Ошибка чтения файла\n");

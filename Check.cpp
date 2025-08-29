@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <stdbool.h>
-#include <cassert>
-#include <cstring>
+#include <assert.h>
+#include <string.h>
 
 #include "Check.h"
 #include "Input.h"
@@ -33,53 +33,35 @@ bool check_square(double a)
 }
 
 
-bool check_flags(bool * ptr_if_cf_correct, const char * argv[], int argc, double * ptr_a, double * ptr_b, double * ptr_c)
+bool check_cf(int cnt, bool * ptr_if_cf_correct, const char * argv[], int argc, double * ptr_a, double * ptr_b, double * ptr_c)
 {
+	assert(!isnan(cnt));
+	assert(!isnan(argc));
 	assert(ptr_if_cf_correct != NULL);
 	assert(argv != NULL);
 	assert(ptr_a != NULL);
 	assert(ptr_b != NULL);
 	assert(ptr_c != NULL);
-	assert(!isnan(argc));
 
-	int cnt_argc = argc;
-	int cnt = 0;
-	bool if_tests = false;
-
-	for (cnt = 0; cnt_argc > 0; cnt++, cnt_argc--)
+	if ((argc - cnt) >= 4)
 	{
-		if (strcmp(argv[cnt], "--test") == 0)
-		{
-			if (RunTests() == false)
-				return false;
-			if_tests = true;
-		}
+		get_from_command_line(ptr_if_cf_correct, cnt, argv, ptr_a, ptr_b, ptr_c);
+		return true;
 	}
-
-	cnt_argc = argc;
-
-	if (if_tests == false)
-		printf("Программа запущена без тестов\n");
-
-	for (cnt = 0; cnt_argc > 0; cnt++, cnt_argc--)
+	else if ((argc - cnt) < 4)
 	{
-		if (strcmp(argv[cnt], "--cf") == 0 && (argc - cnt) >= 4)
-		{
-			get_from_command_line(ptr_if_cf_correct, cnt, argv, ptr_a, ptr_b, ptr_c);
-			return true;
-		}
-		else if (strcmp(argv[cnt], "--cf") == 0 && (argc - cnt) < 4)
-		{
-			printf("Коэффициенты введены некорректно");
-			*ptr_if_cf_correct = false;
-			return true;
-		}
+		printf("Коэффициенты введены некорректно");
+		*ptr_if_cf_correct = false;
+		return true;
 	}
 	return false;
 }
 
 void show_arguments(int argc, const char * argv[])
 {
+	assert(argv != NULL);
+	assert(!isnan(argc));
+
 	int cnt_argc = argc;
 	int cnt = 0;
 	for (cnt = 0; cnt_argc > 0; cnt++, cnt_argc--)

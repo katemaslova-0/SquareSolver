@@ -15,4 +15,11 @@ enum Input {
     kDefaultInput
 };
 
+struct Flags
+{
+	bool show_flags;
+	bool test_flag;
+	bool cf_flag;
+};
+
 #endif // SQUARE_SOLVER_DATA_H

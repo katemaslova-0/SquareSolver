@@ -6,6 +6,7 @@
 #include <cassert>
 
 #include "Input.h"
+#include "Check.h"
 
 #define ANSI_COLOR_RED    "\033[0;31m"
 #define ANSI_COLOR_GREEN  "\033[0;32m"
@@ -50,16 +51,12 @@ bool get_number_from_console(double * ptr)
 }
 
 
-bool get_number_from_file(double * ptr)
+bool get_number_from_file(FILE * fp, double * ptr)
 {
-	FILE * fp = fopen("testfile.txt", "r");
-
-	assert(fp != NULL);
 	assert(ptr != NULL);
 
 	if (fscanf(fp, "%lf", ptr) == 1)
 	{
-		fclose(fp);
 		return true;
 	}
 	else
@@ -103,9 +100,13 @@ bool get_from_file(double * ptr_a, double * ptr_b, double * ptr_c)
 	assert(ptr_b != NULL);
 	assert(ptr_c != NULL);
 
-	return get_number_from_file(ptr_a) == true
-		&& get_number_from_file(ptr_b) == true
-		&& get_number_from_file(ptr_c) == true;
+	FILE * fp = fopen("testfile.txt", "r");
+
+	bool result = get_number_from_file(fp, ptr_a)
+			   && get_number_from_file(fp, ptr_b)
+			   && get_number_from_file(fp, ptr_c);
+	fclose(fp);
+	return result;
 }
 
 
@@ -121,9 +122,9 @@ void get_from_command_line(bool * ptr_if_cf_correct, int cnt, const char * argv[
 	char * endptrB = NULL;
 	char * endptrC = NULL;
 
-	if ((strtod(argv[cnt + 1], &endptrA) == 0 && *endptrA != '\0')
-	|| (strtod(argv[cnt + 2],  &endptrB) == 0 && *endptrB != '\0')
-	|| (strtod(argv[cnt + 3], &endptrC) == 0 && *endptrC != '\0'))
+	if ((is_num_zero(strtod(argv[cnt + 1], &endptrA)) && *endptrA != '\0') // TODO: compare doubles
+	||  (is_num_zero(strtod(argv[cnt + 2], &endptrB)) && *endptrB != '\0')
+	||  (is_num_zero(strtod(argv[cnt + 3], &endptrC)) && *endptrC != '\0'))
 	{
 		printf("Коэффициенты введены некорректно");
 		*ptr_if_cf_correct = false;
